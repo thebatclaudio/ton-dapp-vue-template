@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  disclosuregame-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - 80
+    environment:
+      VIRTUAL_HOST: disclosuregame.thebatclaud.io
+      LETSENCRYPT_HOST: disclosuregame.thebatclaud.io
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - nginx-proxy
+
+networks:
+  nginx-proxy:
+    external: true
