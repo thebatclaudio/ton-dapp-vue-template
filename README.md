@@ -2,6 +2,8 @@
 
 Welcome to the **TON DApp Vue Template**! This project is a powerful template designed for creating a Telegram Mini App (TMA) with seamless integration of the TON blockchain using Vue.js. It comes fully equipped with Tailwind CSS for styling and includes a GitHub Actions workflow to automate deployment to GitHub Pages.
 
+Demo: [https://thebatclaudio.github.io/ton-dapp-vue-template](https://thebatclaudio.github.io/ton-dapp-vue-template)
+
 ![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![TON](https://img.shields.io/badge/TON-0078FF?style=for-the-badge&logo=ton&logoColor=white)
