@@ -1,5 +1,13 @@
 # 🚀 The Satoshi Circle Telegram Mini App (TMA)
 
+Add on Telegram: [https://t.me/TheSatoshiCircle_Bot](https://t.me/TheSatoshiCircle_Bot)
+
+![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TON](https://img.shields.io/badge/TON-0078FF?style=for-the-badge&logo=ton&logoColor=white)
+![Telegram](https://img.shields.io/badge/Telegram_Mini_App-0088cc?style=for-the-badge&logo=telegram&logoColor=white)
+![GitHub_Pages](https://img.shields.io/badge/GitHub_Pages-222222?style=for-the-badge&logo=github&logoColor=white)
+
 ## 🛠️ Getting Started
 
 ### Prerequisites
