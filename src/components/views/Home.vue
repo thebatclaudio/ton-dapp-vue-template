@@ -55,7 +55,7 @@ onMounted(() => {
     </div>
     <div class="flex justify-center mt-2">
       <Button @click="openModal()">
-        Open modal
+        Open test modal
       </Button>
     </div>
     <div class="flex flex-col mt-5">

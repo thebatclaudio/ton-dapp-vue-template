@@ -1,5 +1,5 @@
 <script setup>
-import { HomeIcon, BeakerIcon } from '@heroicons/vue/24/solid'
+import { HomeIcon, UserGroupIcon, ClipboardDocumentCheckIcon, BookOpenIcon } from '@heroicons/vue/24/solid'
 import { defineProps, shallowRef } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
@@ -18,21 +18,21 @@ const menuItems = shallowRef([
   },
   {
     'id': 'menu-1',
-    'title': 'Menu 1',
-    'path': '/menu-1',
-    'icon': BeakerIcon
+    'title': 'L-Earn',
+    'path': '/learn',
+    'icon': BookOpenIcon
   },
   {
     'id': 'menu-2',
-    'title': 'Menu 2',
+    'title': 'Frens',
     'path': '/menu-2',
-    'icon': BeakerIcon
+    'icon': UserGroupIcon
   },
   {
     'id': 'menu-3',
-    'title': 'Menu 3',
-    'path': '/menu-3',
-    'icon': BeakerIcon
+    'title': 'Survey',
+    'path': '/questionnaire',
+    'icon': ClipboardDocumentCheckIcon
   },
 ])
 

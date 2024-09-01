@@ -12,6 +12,8 @@ import App from "./App.vue";
 
 import Loading from "./components/common/Loading.vue";
 import Home from "./components/views/Home.vue";
+import Questionnaire from './components/views/Questionnaire.vue';
+import Learn from './components/views/Learn.vue';
 
 const getBasePath = () => {
   const path = window.location.pathname;
@@ -22,6 +24,8 @@ const getBasePath = () => {
 const routes = [
   { path: "/", component: Loading },
   { path: "/home", component: Home },
+  { path: '/questionnaire', component: Questionnaire },
+  { path: '/learn', component: Learn },
 ];
 
 const router = createRouter({
