@@ -3,6 +3,7 @@ import { HomeIcon, UserGroupIcon, ClipboardDocumentCheckIcon, BookOpenIcon } fro
 import { defineProps, shallowRef } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
+
 import { store } from '../../common/store';
 
 const props = defineProps(['currentRoute'])
@@ -14,7 +15,7 @@ const menuItems = shallowRef([
     'id': 'home',
     'title': 'Home',
     'path': '/home',
-    'icon': HomeIcon,
+    'icon': HomeIcon
   },
   {
     'id': 'menu-1',
@@ -25,7 +26,7 @@ const menuItems = shallowRef([
   {
     'id': 'menu-2',
     'title': 'Frens',
-    'path': '/menu-2',
+    'path': '/frens',
     'icon': UserGroupIcon
   },
   {

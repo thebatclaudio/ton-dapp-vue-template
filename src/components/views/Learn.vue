@@ -4,7 +4,8 @@
     
     <!-- Task 1: Unirsi al Gruppo Telegram -->
     <div class="task-item">
-      <p class="task-text">Join TSC Chat</p>
+      <img src="/logo1.png" alt="Logo TSC Chat" class="task-icon" />
+      <p class="task-text">Join Chat</p>
       <a
         :href="telegramGroupLink"
         class="task-button"
@@ -17,7 +18,8 @@
     
     <!-- Task 2: Iscriversi al Canale Telegram -->
     <div class="task-item">
-      <p class="task-text">Join TSC News</p>
+      <img src="/logo2.png" alt="Logo TSC Chat" class="task-icon" />
+      <p class="task-text">Join News</p>
       <a
         :href="telegramChannelLink"
         class="task-button"
@@ -30,7 +32,8 @@
 
     <!-- Task 3: Iscriversi alla pagina su X -->
     <div class="task-item">
-      <p class="task-text">Follow TSC on X</p>
+      <img src="/logo3.png" alt="Logo TSC Chat" class="task-icon" />
+      <p class="task-text">Follow X</p>
       <a
         :href="telegramTwitterLink"
         class="task-button"
@@ -44,7 +47,6 @@
 </template>
 
 <script setup>
-
 // Funzione che incrementa il contatore di 50 unità
 // const completeTask = () => { store.incrementAmount(50); }; (non funziona l'import di store)
 
@@ -97,7 +99,7 @@ const telegramTwitterLink = 'https://x.com/satoshiscircle';
 }
 
 .task-button {
-  background: linear-gradient(135deg, #3b82f6, #2563eb); /* Gradient per i bottoni */
+  background: linear-gradient(135deg, #229ED9, #229ED9); /* Gradient per i bottoni */
   color: white;
   padding: 12px 24px;
   border-radius: 8px;
@@ -112,5 +114,12 @@ const telegramTwitterLink = 'https://x.com/satoshiscircle';
   background: linear-gradient(135deg, #2563eb, #1d4ed8); /* Colore più scuro al passaggio del mouse */
   transform: translateY(-3px); /* Leggero sollevamento al passaggio del mouse */
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* Aumenta l'ombra al passaggio del mouse */
+}
+
+.task-icon {
+  width: 64px; /* Dimensione dell'icona */
+  height: 64px;
+  margin-right: 10px; /* Spazio tra l'icona e il testo */
+  border-radius: 5%; /* Arrotonda gli angoli dell'immagine */
 }
 </style>

@@ -170,7 +170,7 @@ const saveToFile = function (content, filename) {
   </div>
 
   <!-- Messaggio di ringraziamento -->
-  <div v-else class="thank-you-message">
+  <div v-else class="thank-you-message font-mono">
     <p>Grazie per aver completato il questionario!</p>
   </div>
 </template>

@@ -18,6 +18,7 @@
     "@types/node": "^22.5.0",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "sass": "^1.77.8",
+    "v-click-outside": "^3.2.0",
     "vite-plugin-node-polyfills": "^0.22.0",
     "vue": "^3.4.29",
     "vue-router": "^4.4.3",
