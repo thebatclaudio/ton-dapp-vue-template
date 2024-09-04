@@ -1,8 +1,6 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { initHapticFeedback } from '@telegram-apps/sdk';
-import ToshiIcon from '/public/ToshiIcon.png';
-import SatoshiAvatar from '/public/SatoshiAvatar.png';
 import Modal from '../modals/Modal.vue';
 import Button from '../common/Button.vue';
 import { store } from '../../common/store';
@@ -23,13 +21,38 @@ const modalDescription = ref('');
 
 const showInstructionsModal = ref(false); // Stato per mostrare/nascondere la modale delle istruzioni
 
+const animateTimeout = ref(null);
+const isIconAnimated = ref(true);
+
 const handleClick = (event) => {
   hapticFeedback.impactOccurred('heavy');
   store.incrementAmount();
 
-  // Incrementa la chiave per forzare il re-render dell'immagine
-  bounceKey.value += 1;
+
+  isIconAnimated.value = false;
+
+  setTimeout(() => {
+    isIconAnimated.value = true;
+  }, 10);
+
+  animateTimeout.value = setTimeout(() => {
+    isIconAnimated.value = false;
+
+    if (animateTimeout.value) {
+      clearTimeout(animateTimeout.value);
+    }
+  }, 500);
 };
+
+const iconAnimate = computed(() => {
+  if (isIconAnimated.value) {
+    return {
+      'animate-bounce': true
+    }
+  }
+
+  return null;
+});
 
 const openModal = () => {
   modalOpen.value = true;
@@ -54,25 +77,37 @@ onMounted(() => {
   if (telegram.initDataUnsafe && telegram.initDataUnsafe.user) {
     username.value = telegram.initDataUnsafe.user.username || 'USER';
   }
+
+  animateTimeout.value = setTimeout(() => {
+    isIconAnimated.value = false;
+
+    if (animateTimeout.value) {
+      clearTimeout(animateTimeout.value);
+    }
+  }, 500);
 });
 
 </script>
 
 <template>
 
-  <div class="app-container">
-    <div class="header">
-      <div class="menu-container">
-        <ProfileMenu />
+  <div class="border-4 border-sky-400 rounded-xl bg-white p-1 h-full">
+    <div class="flex w-full">
+      <div class="flex flex-1">
+        <div class="flex bg-sky-400 text-white font-black rounded-xl p-2" @click="showUsernameInstructions">
+          <div class="flex flex-col justify-center mx-1">
+            <span class="text-sm font-mono">{{ username }}</span>
+          </div>
+        </div>
       </div>
-      <!-- Contenitore per l'avatar e l'username -->
-      <div class="user-info">
-        <img :src="SatoshiAvatar" alt="Satoshi" class="satoshi-pic" />
-        <span class="username" @click="showUsernameInstructions">{{ username }}</span> <!-- Clicca su "USER" per vedere le istruzioni -->
+      <div>
+        <div class="bg-sky-400 rounded-xl p-2 aspect-square text-white">
+          <ProfileMenu />
+        </div>
       </div>
     </div>
 
-    <div class="text-center flex flex-col h-full pt-1">
+    <div class="text-center flex flex-col mt-5">
       <div class="font-mono text-4xl sm:text-6xl pt-1 text-blue-400">
         {{ store.currentAmount }}
         <div>
@@ -82,12 +117,18 @@ onMounted(() => {
       <div class="flex-1 flex flex-col justify-center content-center">
         <div class="flex justify-center">
           <div class="cursor-pointer" @click="handleClick">
-            <img :src="ToshiIcon" :key="bounceKey" class="toshi-coin-image animate-bounce" alt="toshi-coin" />        
+            <img src="/ToshiIcon.png" class="toshi-coin-image" :class="iconAnimate" alt="toshi-coin" />
           </div>
         </div>
       </div>
 
-      <div class="text-center text-3xl uppercase p-5">
+
+      <div class="flex flex-col mt-5 text-black">
+        <div class="uppercase text-xs">Daily taps</div>
+        <div class="font-mono font-bold">{{ store.user?.daily_taps }}/{{ store.maxDailyTaps }}</div>
+      </div>
+
+      <!-- <div class="text-center text-3xl uppercase p-5">
         <button id="ton-connect-button" type="button"></button>
       </div>
       <div class="flex justify-center">
@@ -99,15 +140,11 @@ onMounted(() => {
         <Button @click="openModal()">
           Test bottone
         </Button>
-      </div>
-      <div class="flex flex-col mt-5 text-black">
-        <div class="uppercase text-xs">Daily taps</div>
-        <div class="font-mono font-bold">{{ store.user?.daily_taps }}/{{ store.maxDailyTaps }}</div>
-      </div>
+      </div> -->
     </div>
 
-    <Modal :isOpen="modalOpen" @close="modalOpen = false" :confirmButtonEnabled="false"
-      :cancelButtonText="'Ok'" :title="modalTitle">
+    <Modal :isOpen="modalOpen" @close="modalOpen = false" :confirmButtonEnabled="false" :cancelButtonText="'Ok'"
+      :title="modalTitle">
       <p class="text-center">
         {{ modalDescription }}
       </p>
@@ -119,13 +156,13 @@ onMounted(() => {
       <p>
         Segui questi semplici passaggi:<br><br>
       </p>
-      <ol class="instruction-list">
+      <ol class="list-decimal">
         <li>Apri l'app di Telegram.</li>
         <li>Vai sul menu "impostazioni".</li>
         <li>Clicca su "Username" e imposta l'username che preferisci.</li>
         <li>Salva.</li>
       </ol>
-      <p>
+      <p class="mt-3">
         Apri nuovamente l'app per visualizzare il tuo username.
       </p>
     </Modal>
@@ -133,86 +170,28 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.app-container {
-  min-height: 100vh; /* Assicura che l'altezza copra l'intero schermo */
-  background-color: #eceff1; /* Cambia qui il colore di sfondo */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  padding-top: 20px;
-  align-items: center;
-  border: 5px solid #229ED9; /* Cornice verde */
-  border-radius: 15px; /* Angoli arrotondati per la cornice */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Aggiunge un'ombra per evidenziare la cornice */
-}
-
 @keyframes custom-bounce {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
+
   40% {
-    transform: translateY(-50px); /* Altezza del rimbalzo */
+    transform: translateY(-10px);
+    /* Altezza del rimbalzo */
   }
+
   60% {
-    transform: translateY(-25px); /* Altezza intermedia del rimbalzo */
+    transform: translateY(-5px);
+    /* Altezza intermedia del rimbalzo */
   }
 }
 
 .animate-bounce {
-  animation: custom-bounce 0.5s ease-out; /* Rimbalzo più rapido per maggiore reattività */
-}
-
-.header {
-  display: flex;
-  justify-content: space-between; /* Centra il contenitore .user-info orizzontalmente */
-  align-items: center; /* Centra verticalmente .user-info */
-  box-sizing: border-box; /* Assicura che il padding sia incluso nella larghezza */
-}
-
-.menu-container {
-  display: flex; /* Allinea l'avatar e l'username orizzontalmente */
-  align-items: center; /* Allinea verticalmente l'avatar e l'username */
-  padding: 10px;
-  background-color: #229ED9;
-  border-radius: 15px; /* Arrotonda gli angoli con un raggio di 15px */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra leggera per evidenziare l'effetto */
-  transform: translateX(+420%);
-}
-
-.user-info {
-  display: flex; /* Allinea l'avatar e l'username orizzontalmente */
-  align-items: center; /* Allinea verticalmente l'avatar e l'username */
-  padding: 10px;
-  background-color: #229ED9;
-  border-radius: 15px; /* Arrotonda gli angoli con un raggio di 15px */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra leggera per evidenziare l'effetto */
-  transform: translateX(-149%);
-  margin-left: 20px;
-}
-
-.satoshi-pic {
-  width: 40px; /* Dimensione dell'avatar */
-  height: 40px; /* Mantiene l'avatar come quadrato */
-  border-radius: 50%; /* Rende l'immagine circolare */
-  margin-right: 2px; /* Spazio tra l'avatar e l'username */
-}
-
-.username {
-  font-size: 0.8rem; /* Dimensione del font per l'username */
-  color: #f4f4f4; /* Colore bianco per rendere il testo visibile su sfondo scuro */
-}
-
-.toshi-coin-image {
-  max-width: 100%;
-  height: auto;
-}
-
-.instruction-list {
-  padding-left: 20px;
-}
-
-.instruction-list li {
-  margin-bottom: 10px;
+  animation: custom-bounce 0.5s ease-out infinite;
+  /* Rimbalzo più rapido per maggiore reattività */
 }
 </style>
