@@ -77,7 +77,7 @@ onMounted(() => {
       <div class="w-full flex justify-between items-center mb-4">
         <div class="flex items-center p-3 bg-blue-500 rounded-lg shadow-lg" @click="showUsernameInstructions">
           <img src="/SatoshiAvatar.png" alt="Satoshi" class="w-10 h-10 rounded-full mr-2" />
-          <span class="text-white text-sm cursor-pointer">{{ username }}</span>
+          <span class="text-white text-sm font-black font-mono cursor-pointer">{{ store.user.username }}</span>
         </div>
 
         <div class="p-2 bg-blue-500 rounded-lg shadow-lg aspect-square text-white">
