@@ -11,7 +11,7 @@ const toggleDropdown = () => {
 
 <template>
   <div class="relative inline-block text-left">
-    <Bars3Icon @click="toggleDropdown" class="w-6 h-6 cursor-pointer text-gray-700" />
+    <Bars3Icon @click="toggleDropdown" class="w-6 h-6 cursor-pointer text-white-700" />
     <div v-if="isOpen" @click.outside="isOpen = false" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-20">
       <ul class="list-none p-0 m-0">
         <li>
