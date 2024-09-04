@@ -9,7 +9,3 @@
   <script setup>
   </script>
   
-  <style scoped>
-  /* Aggiungi stili personalizzati per la pagina del profilo, se necessario */
-  </style>
-  
