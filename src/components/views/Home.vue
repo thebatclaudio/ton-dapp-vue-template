@@ -107,7 +107,7 @@ onMounted(() => {
         </div>
 
         <div class="flex flex-col text-white text-center">
-          <div class="uppercase text-xs">Daily taps</div>
+          <div class="uppercase text-xs">TAPS</div>
           <div class="font-mono font-bold">{{ store.user?.daily_taps }}/{{ store.maxDailyTaps }}</div>
         </div>
 
